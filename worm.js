@@ -1,5 +1,6 @@
 const canvas = document.querySelector(".worm"); 
 const ctx = canvas.getContext("2d");
+const score = document.querySelector("h1");
 
 const worm = [];
 
@@ -14,6 +15,9 @@ let Ry;
 let x = 31;
 let y = 31;
 let key;
+
+let bodY;
+let bodX;
 
 function keyRead(e){
     if(e.key === "w" || e.key === "a"||e.key === "s" ||e.key === "d"){
@@ -33,7 +37,6 @@ function touchRead(){
     if(x2>Rx1&&x1<Rx2){
         if(y2>Ry1&&y1<Ry2){
             apple();
-            console.log("hey");
         }
     }
 }
@@ -58,21 +61,37 @@ function move(){
 
 }
 
-function draw(){
-    ctx.clearRect(0,0,maxW,maxH);
+function headDraw(){
     ctx.strokeStyle="black"
     ctx.beginPath();
     ctx.arc(x, y, 30, 0, Math.PI * 2);
     ctx.stroke();
+}
+
+function bodyDraw(){
+    ctx.strokeStyle="blue"
+    ctx.beginPath();
+    ctx.arc(bodX, bodY, 30, 0, Math.PI * 2);
+    ctx.stroke();
+}
+
+function appleDraw(){
     ctx.strokeStyle="red"
     ctx.beginPath();
     ctx.arc(Rx, Ry, 30, 0, Math.PI * 2);
     ctx.stroke();
 }
 
+function draw(){
+    ctx.clearRect(0,0,maxW,maxH);
+    headDraw();
+    bodyDraw();
+    appleDraw();
+}
+
 function apple(){
     point++;
-    console.log(point);
+    score.innerText = point;
     Rx = Math.floor(Math.random()*maxW)
     Ry = Math.floor(Math.random()*maxH)
     ctx.strokeStyle="red"
