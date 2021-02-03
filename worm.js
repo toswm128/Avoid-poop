@@ -107,7 +107,7 @@ function appleDraw(){
 function draw(){
     ctx.clearRect(0,0,maxW,maxH);
     headDraw();
-    for(j = 1; j<point;j++){
+    for(j = 1; j<point+1;j++){
         bodyDraw(j);
     }
     appleDraw();
@@ -115,7 +115,7 @@ function draw(){
 
 function apple(){
     point++;
-    console.log(bodX);
+    console.log(j);
     score.innerText = point;
     Rx = Math.floor(Math.random()*maxW)
     Ry = Math.floor(Math.random()*maxH)
