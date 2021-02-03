@@ -84,10 +84,13 @@ function headDraw(){
 }
 
 function body(){
-    
+    bodyDraw(1);
 }
 
-function bodyDraw(){
+function bodyDraw(chile){
+    if(i>=80)
+    {bodX = worm[i-interval*chile].x;
+    bodY = worm[i-interval*chile].y;}
     ctx.strokeStyle="blue"
     ctx.beginPath();
     ctx.arc(bodX, bodY, 30, 0, Math.PI * 2);
@@ -104,7 +107,9 @@ function appleDraw(){
 function draw(){
     ctx.clearRect(0,0,maxW,maxH);
     headDraw();
-    bodyDraw();
+    for(j = 1; j<point;j++){
+        bodyDraw(j);
+    }
     appleDraw();
 }
 
