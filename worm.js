@@ -3,6 +3,10 @@ const ctx = canvas.getContext("2d");
 const score = document.querySelector("h1");
 
 const worm = [];
+let  i = 0;
+let j = 0;
+
+const interval = 80
 
 const maxW = canvas.width;
 const maxH = canvas.height;
@@ -25,6 +29,17 @@ function keyRead(e){
     }
 }
 
+function wormBody(){
+    const headXY = {
+        x,
+        y
+    };
+    worm.push(headXY);
+    i++;
+    bodX = worm[i-interval].x;
+    bodY = worm[i-interval].y;
+}
+
 function touchRead(){
     const x1 = x-30;
     const x2 = x+30;
@@ -43,19 +58,19 @@ function touchRead(){
 
 function move(){
     if(key === "w"){
-        y--;
+        y=y-1;
         draw();
     }
     if(key === "a"){
-        x--;
+        x=x-1;
         draw();
     }
     if(key === "s"){
-        y++;
+        y=y+1;
         draw();
     }
     if(key === "d"){
-        x++;
+        x=x+1;
         draw();
     }
 
@@ -66,6 +81,10 @@ function headDraw(){
     ctx.beginPath();
     ctx.arc(x, y, 30, 0, Math.PI * 2);
     ctx.stroke();
+}
+
+function body(){
+    
 }
 
 function bodyDraw(){
@@ -91,6 +110,7 @@ function draw(){
 
 function apple(){
     point++;
+    console.log(bodX);
     score.innerText = point;
     Rx = Math.floor(Math.random()*maxW)
     Ry = Math.floor(Math.random()*maxH)
@@ -104,6 +124,7 @@ function init(){
     draw();
     apple();
     window.addEventListener("keydown",keyRead)
+    setInterval(wormBody,1);
     setInterval(move,1);
     setInterval(touchRead,1);
 }
